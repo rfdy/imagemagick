@@ -1,0 +1,25 @@
+{
+    "type": "library",
+    "name": "rfd/imagemagick",
+    "description": "RFD ImageMagick Library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tyler Lawson",
+            "email": "tyler.lawson@yp.ca"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rfd\\ImageMagick\\": ""
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.0"
+        }
+    }
+}

@@ -1,4 +1,87 @@
 imagemagick
 ===========
 
-RFD ImageMagick library
+RFD ImageMagick library.
+
+# Usage
+
+`composer require rfd/imagemagick`
+
+```php
+<?php
+
+use Rfd\ImageMagick;
+use Rfd\ImageMagick\CLI\OperationFactory();
+use Rfd\ImageMagick\Image\File;
+use Rfd\ImageMagick\Options\CommonOptions;
+
+$im = new ImageMagick(new OperationFactory());
+
+$image = new File('/path/to/your/image.png');
+$output = new File('/path/to/output/image.jpg');
+
+$operation_builder = $im->getOperationBuilder($image);
+
+$operation_builder
+    ->resize()
+        ->setWidth(320)
+        ->setHeight(240)
+        ->setGravity(CommonOptions::GRAVITY_CENTER)
+    ->next()
+    ->slice()
+        ->setWidth(300)
+        ->setHeight(200)
+        ->setOffsetX(0)
+        ->setOffsetY(0)
+        ->setGravity(CommonOptions::GRAVITY_NORTHWEST)
+    ->finish($output);
+
+```
+
+# About
+## Included Functionality
+Included is only a few commands that we've found useful at RedFlagDeals.  You're able to string them together to get most common things done.
+
+### Commands
+#### Slice
+Extracts a rectangle from the image based on the width, height, offset X, offset Y, and gravity.
+#### Resize
+Resizes the image based on the width, height, gravity and resize mode
+##### Modes
+`CommonOptions::MODE_ONLY_SHRINK_LARGER` Will only shrink the image if it is larger than the requested dimesnions.  Otherwise it leaves the image alone.  See: http://www.imagemagick.org/Usage/resize/#shrink
+
+`CommonOptions::MODE_FILL_AREA` will resize to the smallest dimension.  See: http://www.imagemagick.org/Usage/resize/#fill
+
+`CommonOptions::MODE_FILL_AREA_OR_FIT` will shrink to fill the area if the image is larger than the requested width and height.  Otherwise it will increase the image's size to fit within the width and height.
+
+`CommonOptions::MODE_RESIZE_ABSOLUTE` doesn't care about the aspect ratio and forces the image to be exactly the requested width and height.  See: http://www.imagemagick.org/Usage/resize/#noaspect
+
+#### Convert
+Some defaults are set at `CommonOptions::FORMAT_*` it will force the output mode to a specific image type.  Any string that ImageMagick recognizes as an image format will be accepted.
+
+#### Watermark
+Could also be called "Composite."  This takes one image, resizes it to 98% the size of another image, and slaps it on top.  If you use an image with transparency (like we do) you get a nice watermark.
+
+#### Info
+Returns an array of image information from `Result->getExtra()`.  This is an "Instant" operation.  Nothing after it will be processed.
+
+#### Compare
+Returns a float value or "inf" on `Result->getExtra()` and an image with the compare result on `Result->getImage()`.  This is an "Instant" operation.  Nothing after it will be processed.
+
+## Processing Images
+All processing is done after the command has been built by calling `Builder->finish()`.  If a subclass of Image is provided, it will call `Image->setImageData()` on it.
+## Instant Operations
+Currently there are two "instant" operations, Info and Compare.  Due to the nature of the information returned, it doesn't make sense to continue processing.
+
+## Notes
+#### Only works on the command line
+We've never used the IMagick PECL extension.  The implementation provided is completely CLI-based.  The command line is built, then run when `Builder->finish()` is called.
+
+#### ImageMagick Version
+This library was built against ImageMagick 6.7.7-10 Q16 on Linux.  The PHPUnit tests MAY fail when comparing images in different versions.  Improvements to the tests to help with this would be greatly appreciated.
+
+#### Windows Compatibility
+It should be windows-compatible, we've done a small amount of testing on Windows and there are little fixes for it in the code.  However, there is no guarantee that it will work flawlessly on Windows.
+
+# Contributing
+Pull requests are welcome and encouraged!  We know there's a lot that hasn't been implemented yet.
