@@ -1,0 +1,4 @@
+imagemagick
+===========
+
+RFD ImageMagick library
