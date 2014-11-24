@@ -33,7 +33,7 @@ abstract class ImageMagickTest extends \PHPUnit_Framework_TestCase {
         $image_filename = $this->operation_factory->getProcessor()->getTempFilename('test_image_');
 
         // Don't use the original image.  File does file_put_contents() when you call ->setImageData().
-        copy(__DIR__ . '/images/test_image_' . $which . '.jpg', $image_filename);
+        copy(__DIR__ . '/images/test_image_' . $which . '.png', $image_filename);
 
         return new File($image_filename);
     }

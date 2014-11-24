@@ -13,4 +13,15 @@ interface Processor {
     public function getTempFilename($prefix, $extension = 'tmp');
 
     public function setOutputFormat($format);
+
+    /**
+     * @param int $quirk
+     * @return bool
+     */
+    public function hasImageMagickQuirk($quirk);
+
+    /**
+     * @return string
+     */
+    public function getImageMagickVersion();
 } 

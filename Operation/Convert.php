@@ -7,8 +7,11 @@ abstract class Convert extends Operation {
 
     /**
      * @param string $format CommonOptions::FORMAT_*
+     * @return $this
      */
     public function setFormat($format) {
         $this->format = $format;
+
+        return $this;
     }
 }

@@ -3,6 +3,7 @@
 namespace Rfd\ImageMagick\Tests\CLI;
 
 use Rfd\ImageMagick\Image\File;
+use Rfd\ImageMagick\Options\CommonOptions;
 
 class CompareTest extends CLITest {
 
@@ -16,7 +17,7 @@ class CompareTest extends CLITest {
             ->setCompareTo($this->getTestImage(2))
             ->finish();
 
-        $this->assertEquals(3.53267, $difference->getExtra());
+        $this->assertTrue($difference->getExtra() > 3.5 && $difference->getExtra() < 3.6);
     }
 
     /**
@@ -36,15 +37,16 @@ class CompareTest extends CLITest {
     public function it_should_be_able_to_use_the_current_context() {
         $difference = $this->imagemagick
             ->getOperationBuilder($this->getTestImage(1))
-            ->resize()
-            ->setWidth(100)
-            ->setHeight(100)
+            ->slice()
+            ->setWidth(100)->setHeight(100)
+            ->setGravity(CommonOptions::GRAVITY_CENTER)
+            ->setOffsetX(10)->setOffsetY(10)
             ->next()
             ->compare()
             ->useCurrent()
-            ->setCompareTo(new File(__DIR__ . '/../images/expected/slice_100x100_10_10_gravity_center.jpg'))
+            ->setCompareTo(new File(__DIR__ . '/../images/expected/slice_100x100_10_10_gravity_center.png'))
             ->finish();
 
-        $this->assertEquals(11.2442, $difference->getExtra());
+        $this->assertEquals('inf', $difference->getExtra());
     }
 }

@@ -53,7 +53,7 @@ class SliceTest extends CLITest {
 
         $this->assertEquals('inf', $this->imagemagick->getOperationBuilder($output_image)
                                                     ->compare()
-                                                    ->setCompareTo(new File(__DIR__ . '/../images/expected/slice_100x100_10_10_gravity_center.jpg'))
+                                                    ->setCompareTo(new File(__DIR__ . '/../images/expected/slice_100x100_10_10_gravity_center.png'))
                                                     ->finish()->getExtra());
     }
 
@@ -108,10 +108,16 @@ class SliceTest extends CLITest {
                           ->setWidth(100)->setHeight(100)->setGravity($gravity)
                           ->finish($output_image);
 
-        $this->assertEquals('inf', $this->imagemagick->getOperationBuilder($output_image)
-                                                     ->compare()
-                                                     ->setCompareTo(new File(__DIR__ . '/../images/expected/slice_100x100_gravity_' . $gravity . '.jpg'))
-                                                     ->finish()->getExtra(), "Gravity {$gravity} failed");
+        $result = $this->imagemagick->getOperationBuilder($output_image)
+                                   ->compare()
+                                   ->setCompareTo(new File(__DIR__ . '/../images/expected/slice_100x100_gravity_' . $gravity . '.png'))
+                                   ->finish();
+
+        $value = $result->getExtra();
+
+        // Different versions of IM will be ever so slightly different
+        // due JPEG compression and such.  Check for exactness or REALLLY closeness.
+        $this->assertTrue($value == 'inf' || $value >= 40, "Gravity {$gravity} failed");
     }
 
 

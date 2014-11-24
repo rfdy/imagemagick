@@ -15,7 +15,7 @@ class InfoTest extends CLITest {
             'width' => 300,
             'height' => 300,
             'depth' => 8,
-            'type' => 'JPEG'
+            'type' => 'PNG'
         ), $info_result->getExtra());
     }
 

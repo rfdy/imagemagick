@@ -25,7 +25,7 @@ class ResizeTest extends CLITest {
             'width' => 100,
             'height' => 100,
             'depth' => 8,
-            'type' => 'JPEG'
+            'type' => 'PNG'
         ), $info_result->getExtra());
     }
 
@@ -48,7 +48,7 @@ class ResizeTest extends CLITest {
             'width' => 50,
             'height' => 50,
             'depth' => 8,
-            'type' => 'JPEG'
+            'type' => 'PNG'
         ), $info_result->getExtra());
     }
 
@@ -73,7 +73,7 @@ class ResizeTest extends CLITest {
             'width' => 300,
             'height' => 300,
             'depth' => 8,
-            'type' => 'JPEG'
+            'type' => 'PNG'
         ), $info_result->getExtra());
     }
 
@@ -98,7 +98,7 @@ class ResizeTest extends CLITest {
             'width' => 200,
             'height' => 200,
             'depth' => 8,
-            'type' => 'JPEG'
+            'type' => 'PNG'
         ), $info_result->getExtra());
     }
 
@@ -130,7 +130,7 @@ class ResizeTest extends CLITest {
             'width' => 150,
             'height' => 100,
             'depth' => 8,
-            'type' => 'JPEG'
+            'type' => 'PNG'
         ), $info_result->getExtra());
     }
 
@@ -157,7 +157,7 @@ class ResizeTest extends CLITest {
             'width' => 300,
             'height' => 300,
             'depth' => 8,
-            'type' => 'JPEG'
+            'type' => 'PNG'
         ), $info_result->getExtra());
 
         $compare_result = $this->imagemagick->getOperationBuilder($output_file)

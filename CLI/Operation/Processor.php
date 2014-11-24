@@ -9,6 +9,9 @@ use Rfd\ImageMagick\Operation\Operation;
 
 class Processor implements \Rfd\ImageMagick\Operation\Processor {
 
+    const QUIRK_RESULT_IS_ONE_WHEN_COMPARE_FAILS = 1;
+
+
     /** @var Operation[] */
     protected $operations = array();
 
@@ -16,8 +19,10 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
 
     protected $temp_input_filename;
 
-    protected $output_format = 'jpg';
+    protected $output_format;
     protected $output_format_is_forced = false;
+
+    protected $quirks;
 
     public function addOperation(Operation $operation) {
         $operation->setProcessor($this);
@@ -105,6 +110,50 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
         return defined('PHP_WINDOWS_VERSION_MAJOR');
     }
 
+    public function hasImageMagickQuirk($quirk) {
+        $this->loadQuirks();
+
+        return $this->quirks & $quirk;
+    }
+
+    public function getImageMagickVersion() {
+        static $version = null;
+
+        if (!$version && $this->isWindows()) {
+            // IM stores this in the registry if you use the installer.
+            if (class_exists('COM', false)) {
+                $shell = new \COM('WScript.Shell');
+                if ($shell) {
+                    $version = $shell->RegRead('HKEY_LOCAL_MACHINE\SOFTWARE\ImageMagick\Current\Version');
+                }
+            }
+        }
+
+        if (!$version) {
+            // Old-fashioned way.
+            exec($this->getImageMagickConvert() . ' -version', $output, $status);
+            if ($status) {
+                throw new ImageMagickException('ImageMagick was not found.');
+            }
+            $first_line = $output[0];
+
+            preg_match('/Version: ImageMagick (\d+\.\d+\.\d+)/', $first_line, $matches);
+            $version = $matches[1];
+        }
+
+        return $version;
+    }
+
+    protected function loadQuirks() {
+        if (is_null($this->quirks)) {
+            $im_version = $this->getImageMagickVersion();
+
+            if (version_compare($im_version, '6.8.1', '>=')) {
+                $this->quirks |= self::QUIRK_RESULT_IS_ONE_WHEN_COMPARE_FAILS;
+            }
+        }
+    }
+
     public function getTempFilename($prefix, $suffix = 'tmp') {
         $name = $this->getTempDir() . DIRECTORY_SEPARATOR . uniqid($prefix) . '.' . $suffix;
         $this->temp_filenames[] = $name;
@@ -135,6 +184,10 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
      * @return string
      */
     protected function getOutputFileWithFormat($temp_output_filename) {
-        return $this->output_format . ':' . escapeshellarg($temp_output_filename);
+        if ($this->output_format) {
+            return $this->output_format . ':' . escapeshellarg($temp_output_filename);
+        }
+
+        return escapeshellarg($temp_output_filename);
     }
 } 
