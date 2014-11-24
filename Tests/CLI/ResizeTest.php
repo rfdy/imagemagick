@@ -167,4 +167,31 @@ class ResizeTest extends CLITest {
 
         $this->assertEquals('inf', $compare_result->getExtra());
     }
+
+    /**
+     * @test
+     */
+    public function it_should_resize_absolutely() {
+        $temp_filename = $this->operation_factory->getProcessor()->getTempFilename('resize_absolute_');
+
+        $output_file = new File($temp_filename);
+        $test_image = $this->getTestImage();
+
+        $this->imagemagick->getOperationBuilder($test_image)
+                          ->resize()
+                          ->setWidth(100)
+                          ->setHeight(500)
+                          ->setGravity(CommonOptions::GRAVITY_CENTER)
+                          ->setMode(CommonOptions::MODE_RESIZE_ABSOLUTE)
+                          ->finish($output_file);
+
+        $info_result = $this->imagemagick->getOperationBuilder($output_file)->info()->finish();
+
+        $this->assertEquals(array(
+            'width' => 100,
+            'height' => 500,
+            'depth' => 8,
+            'type' => 'PNG'
+        ), $info_result->getExtra());
+    }
 } 
