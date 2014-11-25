@@ -48,7 +48,7 @@ Extracts a rectangle from the image based on the width, height, offset X, offset
 #### Resize
 Resizes the image based on the width, height, gravity and resize mode
 ##### Modes
-`CommonOptions::MODE_ONLY_SHRINK_LARGER` Will only shrink the image if it is larger than the requested dimesnions.  Otherwise it leaves the image alone.  See: http://www.imagemagick.org/Usage/resize/#shrink
+`CommonOptions::MODE_ONLY_SHRINK_LARGER` Will only shrink the image if it is larger than the requested dimensions.  Otherwise it leaves the image alone.  See: http://www.imagemagick.org/Usage/resize/#shrink
 
 `CommonOptions::MODE_FILL_AREA` will resize to the smallest dimension.  See: http://www.imagemagick.org/Usage/resize/#fill
 
