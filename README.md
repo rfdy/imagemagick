@@ -68,6 +68,9 @@ Returns an array of image information from `Result->getExtra()`.  This is an "In
 #### Compare
 Returns a float value or "inf" on `Result->getExtra()` and an image with the compare result on `Result->getImage()`.  This is an "Instant" operation.  Nothing after it will be processed.
 
+#### Blur / Gaussian Blur
+Blurs the image by radius and sigma.  Blur is faster, Gaussian Blur is smoother.  See: http://www.imagemagick.org/Usage/blur/
+
 ## Processing Images
 All processing is done after the command has been built by calling `Builder->finish()`.  If a subclass of Image is provided, it will call `Image->setImageData()` on it.
 ## Instant Operations
