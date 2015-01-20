@@ -71,10 +71,30 @@ Returns a float value or "inf" on `Result->getExtra()` and an image with the com
 #### Blur / Gaussian Blur
 Blurs the image by radius and sigma.  Blur is faster, Gaussian Blur is smoother.  See: http://www.imagemagick.org/Usage/blur/
 
+#### Quality
+Sets the output quality of the image.  Generally only useful with lossy formats like JPEG.  With PNG, it determines the compression.  See: http://www.imagemagick.org/script/command-line-options.php#quality  
+
 ## Processing Images
 All processing is done after the command has been built by calling `Builder->finish()`.  If a subclass of Image is provided, it will call `Image->setImageData()` on it.
 ## Instant Operations
 Currently there are two "instant" operations, Info and Compare.  Due to the nature of the information returned, it doesn't make sense to continue processing.
+## One-Shot Operations
+One-Shot operations can take parameters when the operation is requested, instead of having to use ->next().
+
+```
+// These two are exactly the same:
+
+$operation_builder->format(CommonOptions::FORMAT_JPG)
+    ->...;
+
+$operation_builder->format()
+    ->setFormat(CommonOptions::FORMAT_JPG)
+    ->next()
+    ->...;
+```
+
+Only Quality and Format can be called in this way.
+
 
 ## Notes
 #### Only works on the command line
