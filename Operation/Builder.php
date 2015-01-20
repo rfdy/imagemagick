@@ -7,8 +7,11 @@ use Rfd\ImageMagick\Image\Image;
 /**
  * Class Builder
  * @package Rfd\ImageMagick\Operation
+ *
+ * @method Blur blur()
  * @method Compare compare()
  * @method Convert convert()
+ * @method GaussianBlur gaussianBlur()
  * @method Info info()
  * @method Resize resize()
  * @method Slice slice()

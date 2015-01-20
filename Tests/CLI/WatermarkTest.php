@@ -20,10 +20,6 @@ class WatermarkTest extends CLITest {
             ->setWatermarkImage($watermark_image)
             ->finish($output_image);
 
-        file_put_contents('/tmp/watermarked_test_image_1.png', $output_image->getImageData());
-
-        $this->assertTrue(file_exists($output_filename));
-
         $expected_image = new File(__DIR__ . '/../images/expected/watermarked_test_image_1.png');
 
         $this->assertEquals('inf', $this->imagemagick->getOperationBuilder($output_image)->compare()->setCompareTo($expected_image)->finish()->getExtra());

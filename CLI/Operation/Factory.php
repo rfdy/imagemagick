@@ -21,9 +21,12 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new Watermark();
             case Operation::COMPARE:
                 return new Compare();
-                break;
             case Operation::INFO:
                 return new Info();
+            case Operation::BLUR:
+                return new Blur();
+            case Operation::GAUSSIAN_BLUR:
+                return new GaussianBlur();
             default:
                 throw new ImageMagickException('Unknown operation: ' . $operation_name);
                 break;
