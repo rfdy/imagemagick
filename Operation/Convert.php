@@ -1,7 +1,7 @@
 <?php
 namespace Rfd\ImageMagick\Operation;
 
-abstract class Convert extends Operation {
+abstract class Convert extends OneShotOperation {
 
     protected $format;
 
@@ -13,5 +13,9 @@ abstract class Convert extends Operation {
         $this->format = $format;
 
         return $this;
+    }
+
+    public function setValue($value) {
+        $this->setFormat($value);
     }
 }

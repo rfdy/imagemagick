@@ -10,9 +10,10 @@ use Rfd\ImageMagick\Image\Image;
  *
  * @method Blur blur()
  * @method Compare compare()
- * @method Convert convert()
+ * @method Convert|Builder convert(string $format = null)
  * @method GaussianBlur gaussianBlur()
  * @method Info info()
+ * @method Quality|Builder quality(int $quality = null)
  * @method Resize resize()
  * @method Slice slice()
  * @method Watermark watermark()
@@ -58,7 +59,11 @@ class Builder {
             $processor = $this->operation_factory->getProcessor();
             $processor->addOperation($operation);
 
-            $this->current_operation = $operation;
+            if (isset($args[0]) && $operation instanceof OneShotOperation) {
+                $operation->setValue($args[0]);
+            } else {
+                $this->current_operation = $operation;
+            }
         }
 
         return $this;

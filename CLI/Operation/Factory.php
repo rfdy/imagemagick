@@ -27,6 +27,8 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new Blur();
             case Operation::GAUSSIAN_BLUR:
                 return new GaussianBlur();
+            case Operation::QUALITY:
+                return new Quality();
             default:
                 throw new ImageMagickException('Unknown operation: ' . $operation_name);
                 break;

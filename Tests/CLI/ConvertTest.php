@@ -25,7 +25,8 @@ class ConvertTest extends CLITest {
             'width' => 300,
             'height' => 300,
             'depth' => 8,
-            'type' => 'PNG'
+            'type' => 'PNG',
+            'quality' => 0
         ), $info_result->getExtra());
     }
 
@@ -47,7 +48,30 @@ class ConvertTest extends CLITest {
             'width' => 300,
             'height' => 300,
             'depth' => 8,
-            'type' => 'GIF'
+            'type' => 'GIF',
+            'quality' => 0
+        ), $info_result->getExtra());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_operate_as_a_one_shot_operation() {
+        $output_filename = $this->operation_factory->getProcessor()->getTempFilename('convert_');
+        $output_image = new File($output_filename);
+
+        $this->imagemagick->getOperationBuilder($this->getTestImage())
+                          ->convert(CommonOptions::FORMAT_GIF)
+                          ->finish($output_image);
+
+        $info_result = $this->imagemagick->getOperationBuilder($output_image)->info()->finish();
+
+        $this->assertEquals(array(
+            'width' => 300,
+            'height' => 300,
+            'depth' => 8,
+            'type' => 'GIF',
+            'quality' => 0
         ), $info_result->getExtra());
     }
 
@@ -69,7 +93,8 @@ class ConvertTest extends CLITest {
             'width' => 300,
             'height' => 300,
             'depth' => 8,
-            'type' => 'JPEG'
+            'type' => 'JPEG',
+            'quality' => 90
         ), $info_result->getExtra());
     }
 

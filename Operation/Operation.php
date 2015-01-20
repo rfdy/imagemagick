@@ -18,6 +18,7 @@ abstract class Operation {
     const CONVERT = 'convert';
     const GAUSSIAN_BLUR = 'gaussianBlur';
     const INFO = 'info';
+    const QUALITY = 'quality';
     const RESIZE = 'resize';
     const SLICE = 'slice';
     const WATERMARK = 'watermark';
