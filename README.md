@@ -74,6 +74,17 @@ Blurs the image by radius and sigma.  Blur is faster, Gaussian Blur is smoother.
 #### Quality
 Sets the output quality of the image.  Generally only useful with lossy formats like JPEG.  With PNG, it determines the compression.  See: http://www.imagemagick.org/script/command-line-options.php#quality  
 
+#### Strip
+Removes profile information from the image.  See: http://www.imagemagick.org/script/command-line-options.php#strip
+
+#### Add Profile, Remove Profile
+Adds or removes profile information to the image.  AddProfile expects a file name.  RemoveProfile expects a profile name.  See: http://www.imagemagick.org/script/command-line-options.php#profile 
+```
+$operation_builder->addProfile('RGB.icc')
+    ->removeProfile('!exif,*')
+```
+Be careful, though.  Each usage of these methods causes the image to be converted in memory from one profile to another.  Read the doc carefully! 
+
 ## Processing Images
 All processing is done after the command has been built by calling `Builder->finish()`.  If a subclass of Image is provided, it will call `Image->setImageData()` on it.
 ## Instant Operations
@@ -93,7 +104,12 @@ $operation_builder->format()
     ->...;
 ```
 
-Only Quality and Format can be called in this way.
+Quality, Format, AddProfile, RemoveProfile, and Strip can be called this way.
+
+```
+// Strip is called without parameters
+$operation_builder->strip()->...;
+```
 
 
 ## Notes

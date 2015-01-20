@@ -2,7 +2,7 @@
 
 namespace Rfd\ImageMagick\Operation;
 
-abstract class Quality extends OneShotOperation {
+abstract class Quality extends OneShotOperation implements OneShotHasArgument {
     protected $quality = 80;
 
     public function setValue($value) {

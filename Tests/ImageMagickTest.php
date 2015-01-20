@@ -37,13 +37,4 @@ abstract class ImageMagickTest extends \PHPUnit_Framework_TestCase {
 
         return new File($image_filename);
     }
-
-    /**
-     * @test
-     */
-    public function it_should_throw_an_exception_when_operation_is_unknown() {
-        $this->setExpectedException('\\Rfd\\ImageMagick\\Exception\\ImageMagickException');
-
-        $this->imagemagick->getOperationBuilder($this->getTestImage())->foo()->finish();
-    }
 } 

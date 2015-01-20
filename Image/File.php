@@ -29,4 +29,8 @@ class File implements Image {
     public function setImageData($image_data) {
         file_put_contents($this->filename, $image_data);
     }
+
+    public function getFilename() {
+        return $this->filename;
+    }
 }

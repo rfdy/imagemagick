@@ -8,14 +8,17 @@ use Rfd\ImageMagick\Image\Image;
  * Class Builder
  * @package Rfd\ImageMagick\Operation
  *
+ * @method AddProfile|Builder addProfile(string $profile_filename = null)
  * @method Blur blur()
  * @method Compare compare()
  * @method Convert|Builder convert(string $format = null)
  * @method GaussianBlur gaussianBlur()
  * @method Info info()
  * @method Quality|Builder quality(int $quality = null)
+ * @method RemoveProfile|Builder removeProfile(string $profile_name = null)
  * @method Resize resize()
  * @method Slice slice()
+ * @method Builder strip()
  * @method Watermark watermark()
  */
 class Builder {
@@ -59,11 +62,14 @@ class Builder {
             $processor = $this->operation_factory->getProcessor();
             $processor->addOperation($operation);
 
-            if (isset($args[0]) && $operation instanceof OneShotOperation) {
+            if ($operation instanceof OneShotHasArgument && isset($args[0])) {
+                // If it's a one-shot with argument, and there's an argument.
                 $operation->setValue($args[0]);
-            } else {
+            } elseif (!($operation instanceof OneShotOperation) || ($operation instanceof OneShotHasArgument && !isset($args[0]))) {
+                // If it's not a one-shot, or if it's a one-shot but no arguments were passed...
                 $this->current_operation = $operation;
             }
+            // else: If it's a one-shot without arguments, it just gets added (e.g. Strip)
         }
 
         return $this;

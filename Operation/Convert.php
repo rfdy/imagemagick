@@ -1,7 +1,7 @@
 <?php
 namespace Rfd\ImageMagick\Operation;
 
-abstract class Convert extends OneShotOperation {
+abstract class Convert extends OneShotOperation implements OneShotHasArgument {
 
     protected $format;
 

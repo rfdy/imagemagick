@@ -13,14 +13,17 @@ use Rfd\ImageMagick\Image\Image;
  *          Totally fake method so that all the code hinting stuff works.  Actually found in Builder.
  */
 abstract class Operation {
+    const ADD_PROFILE = 'addProfile';
     const BLUR = 'blur';
     const COMPARE = 'compare';
     const CONVERT = 'convert';
     const GAUSSIAN_BLUR = 'gaussianBlur';
     const INFO = 'info';
     const QUALITY = 'quality';
+    const REMOVE_PROFILE = 'removeProfile';
     const RESIZE = 'resize';
     const SLICE = 'slice';
+    const STRIP = 'strip';
     const WATERMARK = 'watermark';
 
 

@@ -11,24 +11,30 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
 
     public function getOperation($operation_name, $arguments = array()) {
         switch ($operation_name) {
+            case Operation::ADD_PROFILE:
+                return new AddProfile();
+            case Operation::BLUR:
+                return new Blur();
+            case Operation::COMPARE:
+                return new Compare();
             case Operation::CONVERT:
                 return new Convert();
+            case Operation::GAUSSIAN_BLUR:
+                return new GaussianBlur();
+            case Operation::INFO:
+                return new Info();
+            case Operation::QUALITY:
+                return new Quality();
+            case Operation::REMOVE_PROFILE:
+                return new RemoveProfile();
             case Operation::RESIZE:
                 return new Resize();
             case Operation::SLICE:
                 return new Slice();
+            case Operation::STRIP:
+                return new Strip();
             case Operation::WATERMARK:
                 return new Watermark();
-            case Operation::COMPARE:
-                return new Compare();
-            case Operation::INFO:
-                return new Info();
-            case Operation::BLUR:
-                return new Blur();
-            case Operation::GAUSSIAN_BLUR:
-                return new GaussianBlur();
-            case Operation::QUALITY:
-                return new Quality();
             default:
                 throw new ImageMagickException('Unknown operation: ' . $operation_name);
                 break;
