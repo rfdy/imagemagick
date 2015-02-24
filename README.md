@@ -11,7 +11,7 @@ RFD ImageMagick library.
 <?php
 
 use Rfd\ImageMagick;
-use Rfd\ImageMagick\CLI\OperationFactory();
+use Rfd\ImageMagick\CLI\OperationFactory;
 use Rfd\ImageMagick\Image\File;
 use Rfd\ImageMagick\Options\CommonOptions;
 
