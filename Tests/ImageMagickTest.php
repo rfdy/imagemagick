@@ -37,4 +37,13 @@ abstract class ImageMagickTest extends \PHPUnit_Framework_TestCase {
 
         return new File($image_filename);
     }
+
+    protected function getTestPdf($which = 1) {
+        $image_filename = $this->operation_factory->getProcessor()->getTempFilename('test_pad_');
+
+        // Don't use the original image.  File does file_put_contents() when you call ->setImageData().
+        copy(__DIR__ . '/images/test_pdf_' . $which . '.pdf', $image_filename);
+
+        return new File($image_filename);
+    }
 } 

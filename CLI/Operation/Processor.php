@@ -4,6 +4,7 @@ namespace Rfd\ImageMagick\CLI\Operation;
 
 use Rfd\ImageMagick\Exception\ImageMagickException;
 use Rfd\ImageMagick\Image\Image;
+use Rfd\ImageMagick\Operation\SequenceNumber;
 use Rfd\ImageMagick\Operation\InstantOperation;
 use Rfd\ImageMagick\Operation\Operation;
 
@@ -35,6 +36,20 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
 
         $this->temp_input_filename = $this->getTempFilename('input_');
         file_put_contents($this->temp_input_filename, $input_image->getImageData());
+
+        // Check for a Frame operation.  It's a little special.
+        foreach ($this->operations as $index => $operation) {
+            if ($operation instanceof SequenceNumber) {
+                $frame = (int)$operation->getValue();
+                if (!$frame) {
+                    throw new ImageMagickException('Frame was not an integer');
+                }
+
+                $this->temp_input_filename .= '[' . $frame . ']';
+                unset($this->operations[$index]);
+            }
+
+        }
 
         $command_line .= ' ' . escapeshellarg($this->temp_input_filename) . ' ';
 

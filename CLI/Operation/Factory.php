@@ -35,6 +35,8 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new Strip();
             case Operation::WATERMARK:
                 return new Watermark();
+            case Operation::SEQUENCE_NUMBER:
+                return new SequenceNumber();
             default:
                 throw new ImageMagickException('Unknown operation: ' . $operation_name);
                 break;

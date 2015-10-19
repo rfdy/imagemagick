@@ -12,6 +12,7 @@ use Rfd\ImageMagick\Image\Image;
  * @method Blur blur()
  * @method Compare compare()
  * @method Convert|Builder convert(string $format = null)
+ * @method SequenceNumber|Builder sequenceNumber(int $sequence_number)
  * @method GaussianBlur gaussianBlur()
  * @method Info info()
  * @method Quality|Builder quality(int $quality = null)

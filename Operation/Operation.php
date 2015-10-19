@@ -25,6 +25,7 @@ abstract class Operation {
     const SLICE = 'slice';
     const STRIP = 'strip';
     const WATERMARK = 'watermark';
+    const SEQUENCE_NUMBER = 'sequenceNumber';
 
 
     protected $processor;
