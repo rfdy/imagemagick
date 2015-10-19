@@ -10,7 +10,7 @@ RFD ImageMagick library.
 ```php
 <?php
 
-use Rfd\ImageMagick;
+use Rfd\ImageMagick\ImageMagick;
 use Rfd\ImageMagick\CLI\Operation\Factory as OperationFactory;
 use Rfd\ImageMagick\Image\File;
 use Rfd\ImageMagick\Options\CommonOptions;
