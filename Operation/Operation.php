@@ -17,16 +17,16 @@ abstract class Operation {
     const BLUR = 'blur';
     const COMPARE = 'compare';
     const CONVERT = 'convert';
+    const DENSITY = 'density';
     const GAUSSIAN_BLUR = 'gaussianBlur';
     const INFO = 'info';
     const QUALITY = 'quality';
     const REMOVE_PROFILE = 'removeProfile';
     const RESIZE = 'resize';
+    const SEQUENCE_NUMBER = 'sequenceNumber';
     const SLICE = 'slice';
     const STRIP = 'strip';
     const WATERMARK = 'watermark';
-    const SEQUENCE_NUMBER = 'sequenceNumber';
-
 
     protected $processor;
     protected $options;

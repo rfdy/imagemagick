@@ -19,6 +19,8 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new Compare();
             case Operation::CONVERT:
                 return new Convert();
+            case Operation::DENSITY:
+                return new Density();
             case Operation::GAUSSIAN_BLUR:
                 return new GaussianBlur();
             case Operation::INFO:
@@ -29,14 +31,14 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new RemoveProfile();
             case Operation::RESIZE:
                 return new Resize();
+            case Operation::SEQUENCE_NUMBER:
+                return new SequenceNumber();
             case Operation::SLICE:
                 return new Slice();
             case Operation::STRIP:
                 return new Strip();
             case Operation::WATERMARK:
                 return new Watermark();
-            case Operation::SEQUENCE_NUMBER:
-                return new SequenceNumber();
             default:
                 throw new ImageMagickException('Unknown operation: ' . $operation_name);
                 break;

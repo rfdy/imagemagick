@@ -4,6 +4,7 @@ namespace Rfd\ImageMagick\CLI\Operation;
 
 use Rfd\ImageMagick\Exception\ImageMagickException;
 use Rfd\ImageMagick\Image\Image;
+use Rfd\ImageMagick\Operation\Density;
 use Rfd\ImageMagick\Operation\SequenceNumber;
 use Rfd\ImageMagick\Operation\InstantOperation;
 use Rfd\ImageMagick\Operation\Operation;
@@ -37,7 +38,7 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
         $this->temp_input_filename = $this->getTempFilename('input_');
         file_put_contents($this->temp_input_filename, $input_image->getImageData());
 
-        // Check for a Frame operation.  It's a little special.
+        // Check for a SequenceNumber or Density operation.  They're a little special.
         foreach ($this->operations as $index => $operation) {
             if ($operation instanceof SequenceNumber) {
                 $frame = (int)$operation->getValue();
@@ -49,6 +50,15 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
                 unset($this->operations[$index]);
             }
 
+            if ($operation instanceof Density) {
+                $density = (int)$operation->getValue();
+                if (!$density) {
+                    throw new ImageMagickException('Density was not an integer');
+                }
+
+                $command_line .= ' -density ' . $density;
+                unset($this->operations[$index]);
+            }
         }
 
         $command_line .= ' ' . escapeshellarg($this->temp_input_filename) . ' ';
