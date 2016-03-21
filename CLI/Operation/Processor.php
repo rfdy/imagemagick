@@ -112,6 +112,9 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
     }
 
     public function getImageMagickPath() {
+        $output = array();
+        $status = 0;
+        
         //if running on windows assume it's in the path
         if ($this->isWindows()) {
             // Windows' version "where" returns all the matches.
