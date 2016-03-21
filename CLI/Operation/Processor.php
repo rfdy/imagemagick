@@ -26,6 +26,9 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
 
     protected $quirks;
 
+    /** @var string */
+    protected $imagemagick_binary_name = 'convert';
+
     public function addOperation(Operation $operation) {
         $operation->setProcessor($this);
 
@@ -108,7 +111,7 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
     }
 
     public function getImageMagickConvert() {
-        return $this->getImageMagickPath() . DIRECTORY_SEPARATOR . 'convert' . ($this->isWindows() ? '.exe' : '');
+        return $this->getImageMagickPath() . DIRECTORY_SEPARATOR . $this->imagemagick_binary_name . ($this->isWindows() ? '.exe' : '');
     }
 
     public function getImageMagickPath() {
@@ -119,7 +122,7 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
         if ($this->isWindows()) {
             // Windows' version "where" returns all the matches.
             // Pick the one with "image" in the path.  There's a program named "convert" in \Windows\System32 as well.
-            exec('where convert', $output);
+            exec('where ' . escapeshellarg($this->imagemagick_binary_name), $output);
 
             foreach ($output as $line) {
                 if (stripos($line, 'image') !== false) {
@@ -127,8 +130,10 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
                 }
             }
         } else {
-            exec('which convert', $output, $status);
-            return $status == 0 ? pathinfo($output[0], PATHINFO_DIRNAME) : false;
+            exec('which ' . escapeshellarg($this->imagemagick_binary_name), $output, $status);
+            if ($status == 0) {
+                return pathinfo($output[0], PATHINFO_DIRNAME);
+            }
         }
 
         throw new ImageMagickException('ImageMagick could not be found.');
@@ -217,5 +222,9 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
         }
 
         return escapeshellarg($temp_output_filename);
+    }
+
+    public function setImageMagickBinaryName($imagemagick_binary_name) {
+        $this->imagemagick_binary_name = $imagemagick_binary_name;
     }
 } 
