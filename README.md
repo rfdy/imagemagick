@@ -15,6 +15,8 @@ use Rfd\ImageMagick\CLI\Operation\Factory as OperationFactory;
 use Rfd\ImageMagick\Image\File;
 use Rfd\ImageMagick\Options\CommonOptions;
 
+require __DIR__ . '/vendor/autoload.php';
+
 $im = new ImageMagick(new OperationFactory());
 
 $image = new File('/path/to/your/image.png');
