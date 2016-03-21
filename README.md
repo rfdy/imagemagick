@@ -3,6 +3,10 @@ imagemagick
 
 RFD ImageMagick library.
 
+# Requirements
+- ImageMagick must be in your $PATH (e.g. /usr/bin/convert)
+- PHP must be able to run `exec()`
+
 # Usage
 
 `composer require rfd/imagemagick`
