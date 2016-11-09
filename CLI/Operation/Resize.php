@@ -49,6 +49,8 @@ class Resize extends \Rfd\ImageMagick\Operation\Resize {
         } elseif ($this->mode & CommonOptions::MODE_RESIZE_ABSOLUTE) {
             $command_line .= ' -gravity ' . escapeshellarg($this->gravity);
             $command_line .= ' -thumbnail ' . escapeshellarg($this->width . 'x' . $this->height . '!');
+        } elseif ($this->mode & CommonOptions::MODE_USE_FILTER) {
+            $command_line .= ' -resize ' . escapeshellarg($this->width . 'x' . $this->height);
         } else {
             $command_line .= ' -gravity ' . escapeshellarg($this->gravity);
             $command_line .= ' -thumbnail ' . escapeshellarg($this->width . 'x' . $this->height);
