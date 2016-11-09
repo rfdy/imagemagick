@@ -39,6 +39,12 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new Strip();
             case Operation::WATERMARK:
                 return new Watermark();
+            case Operation::GAMMA:
+                return new Gamma();
+            case Operation::COALESCE:
+                return new Coalesce();
+            case Operation::UNSHARP:
+                return new Unsharp();
             default:
                 throw new ImageMagickException('Unknown operation: ' . $operation_name);
                 break;

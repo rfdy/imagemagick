@@ -27,7 +27,10 @@ abstract class Operation {
     const SLICE = 'slice';
     const STRIP = 'strip';
     const WATERMARK = 'watermark';
-
+    const GAMMA = 'gamma';
+    const COALESCE = 'coalesce';
+    const UNSHARP = 'unsharp';
+    
     protected $processor;
     protected $options;
 
