@@ -45,6 +45,14 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new Coalesce();
             case Operation::UNSHARP:
                 return new Unsharp();
+            case Operation::EXTENT:
+                return new Extent();
+            case Operation::FILTER:
+                return new Filter();
+            case Operation::BORDER:
+                return new Border();
+            case Operation::DEFINE:
+                return new Define();                
             default:
                 throw new ImageMagickException('Unknown operation: ' . $operation_name);
                 break;
