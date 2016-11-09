@@ -15,7 +15,7 @@ class Define extends \Rfd\ImageMagick\Operation\Define {
         
         foreach($this->definition as $key=>$value)
         {
-            $command_line .= ' -define ' . $key . '=' . $value;
+            $command_line .= ' -define ' . escapeshellarg($key) . '=' . escapeshellarg($value);
         }
 
         $result = new Result();
