@@ -13,6 +13,8 @@ abstract class CommonOptions {
     const MODE_FILL_AREA_OR_FIT = 4;
 
     const MODE_RESIZE_ABSOLUTE = 8;
+    
+    const MODE_USE_FILTER = 16;
 
     // Gravity definitions.  Follows ImageMagick's conventions.
 
