@@ -9,7 +9,7 @@ use Rfd\ImageMagick\Options\CommonOptions;
  * @property Processor $processor
  */
 class Resize extends \Rfd\ImageMagick\Operation\Resize {
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         if ($this->mode & CommonOptions::MODE_FILL_AREA_OR_FIT) {
             // Both...so if it's larger, shrink it to fill the area.
             // Otherwise, fit it.

@@ -11,7 +11,7 @@ class Coalesce extends \Rfd\ImageMagick\Operation\Coalesce {
      *
      * @return Result
      */
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         $result = new Result();
         $result->setCommandLine($command_line . ' -coalesce');
         return $result;

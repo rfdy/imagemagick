@@ -33,7 +33,7 @@ class Builder {
     /** @var Operation */
     protected $current_operation;
 
-    public function __construct(Factory $operation_factory, Image $input_image) {
+    public function __construct(Factory $operation_factory, Image $input_image  = null) {
         $this->operation_factory = $operation_factory;
         $this->input_image = $input_image;
     }

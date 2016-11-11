@@ -11,7 +11,7 @@ class Strip extends \Rfd\ImageMagick\Operation\Strip {
      *
      * @return Result
      */
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         $result = new Result();
         $result->setCommandLine($command_line . ' -strip');
         return $result;

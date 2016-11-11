@@ -11,7 +11,7 @@ class Gamma extends \Rfd\ImageMagick\Operation\Gamma {
      *
      * @return Result
      */
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         $result = new Result();
 
         $result->setCommandLine($command_line . ' -gamma ' . escapeshellarg($this->gamma));

@@ -4,17 +4,19 @@ namespace Rfd\ImageMagick\Image;
 
 use Rfd\ImageMagick\Exception\ImageMagickException;
 
-class Url implements Image {
+class Url implements Image
+{
 
-    protected $timeout = 5;
-    
+    protected $curlOptions = [];
+
     protected $url;
 
-    protected $image_type;
+    protected $imageData = null;
 
-    public function __construct($url, $timeout = 5) {
+    public function __construct($url, $curlOptions = [])
+    {
         $this->url = $url;
-        $this->timeout = $timeout;
+        $this->curlOptions = $curlOptions;
     }
 
     /**
@@ -22,31 +24,38 @@ class Url implements Image {
      *
      * @return string
      */
-    public function getImageData() {
-        return $this->download($this->url);
+    public function getImageData()
+    {
+        if ($this->imageData === null) {
+            $this->imageData = $this->download($this->url);
+        }
+        return $this->imageData;
     }
 
     /**
-     * @param string $image_data
+     * @param string $imageData
      *
-     * @return void
+     * @throws ImageMagickException
      */
-    public function setImageData($image_data) {
+    public function setImageData($imageData)
+    {
         throw new ImageMagickException('Url image does not support output');
     }
-    
+
     protected function download($url)
     {
         $ch = curl_init();
-    	curl_setopt($ch, CURLOPT_URL, $url);
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
-    	$data = curl_exec($ch);
-    	if($data === false)
-        {
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        foreach ($this->curlOptions as $curlOption => $value) {
+            curl_setopt($ch, $curlOption, $value);
+        }
+
+        $data = curl_exec($ch);
+        if ($data === false) {
             throw new ImageMagickException('Url image failed CURL ' . curl_error($ch));
         }
-    	return $data;
+        return $data;
     }
 
 }

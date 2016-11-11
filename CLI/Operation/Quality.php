@@ -11,7 +11,7 @@ class Quality extends \Rfd\ImageMagick\Operation\Quality {
      *
      * @return Result
      */
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         $result = new Result();
 
         $result->setCommandLine($command_line . ' -quality ' . escapeshellarg($this->quality));

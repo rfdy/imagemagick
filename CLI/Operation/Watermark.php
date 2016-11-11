@@ -13,7 +13,7 @@ class Watermark extends \Rfd\ImageMagick\Operation\Watermark {
     const MAX_WATERMARK_WIDTH = 250;
     const MAX_WATERMARK_HEIGHT = 250;
 
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         if (!$this->watermark_image) {
             throw new ImageMagickException('Can\'t watermark if there\'s no image to watermark with!');
         }

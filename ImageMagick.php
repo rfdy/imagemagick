@@ -14,7 +14,7 @@ class ImageMagick {
         $this->operation_factory = $operation_factory;
     }
 
-    public function getOperationBuilder(Image $input_image) {
+    public function getOperationBuilder(Image $input_image = null) {
         return new Builder(clone $this->operation_factory, $input_image);
     }
 }

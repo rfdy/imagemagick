@@ -11,7 +11,7 @@ class Unsharp extends \Rfd\ImageMagick\Operation\Unsharp {
      *
      * @return Result
      */
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         $result = new Result();
 
         $result->setCommandLine($command_line . ' -unsharp ' . escapeshellarg($this->radius . 'x' . $this->sigma . '+' . $this->gain . '+' . $this->threshold));
