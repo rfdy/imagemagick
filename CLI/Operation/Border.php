@@ -4,7 +4,7 @@ namespace Rfd\ImageMagick\CLI\Operation;
 
 use Rfd\ImageMagick\Image\Image;
 
-class Blur extends \Rfd\ImageMagick\Operation\Blur {
+class Border extends \Rfd\ImageMagick\Operation\Border {
     /**
      * @param Image $image
      * @param string $command_line
@@ -14,9 +14,9 @@ class Blur extends \Rfd\ImageMagick\Operation\Blur {
     public function process(Image $image = null, $command_line = '') {
         $result = new Result();
 
-        $result->setCommandLine($command_line . ' -blur ' . escapeshellarg($this->radius . 'x' . $this->sigma));
+        $result->setCommandLine($command_line . ' -bordercolor ' . escapeshellarg($this->color)
+            . ' -border ' . escapeshellarg($this->leftRight . 'x' . $this->topBottom));
 
         return $result;
     }
-
 }

@@ -35,11 +35,15 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
         $this->operations[] = $operation;
     }
 
-    public function processOperations(Image $input_image, Image $output_image = null) {
+    public function processOperations(Image $input_image = null, Image $output_image = null) {
         $command_line = $this->getImageMagickConvert();
 
-        $this->temp_input_filename = $this->getTempFilename('input_');
-        file_put_contents($this->temp_input_filename, $input_image->getImageData());
+        $this->temp_input_filename = false;
+        
+        if($input_image) {
+            $this->getTempFilename('input_');
+            file_put_contents($this->temp_input_filename, $input_image->getImageData());
+        }
 
         // Check for a SequenceNumber or Density operation.  They're a little special.
         foreach ($this->operations as $index => $operation) {
@@ -64,7 +68,9 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
             }
         }
 
-        $command_line .= ' ' . escapeshellarg($this->temp_input_filename) . ' ';
+        if($this->temp_input_filename) {
+            $command_line .= ' ' . escapeshellarg($this->temp_input_filename) . ' ';
+        }
 
         foreach ($this->operations as $operation) {
             if ($operation instanceof InstantOperation) {
@@ -98,7 +104,7 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
             throw new ImageMagickException('Error executing ImageMagick: ' . $status);
         }
 
-        if ($output_image && $this->temp_input_filename) {
+        if ($output_image) {
             $output_image->setImageData(file_get_contents($temp_output_filename));
         }
 

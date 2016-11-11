@@ -11,7 +11,7 @@ class GaussianBlur extends \Rfd\ImageMagick\Operation\GaussianBlur {
      *
      * @return Result
      */
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         $result = new Result();
 
         $result->setCommandLine($command_line . ' -gaussian-blur ' . escapeshellarg($this->radius . 'x' . $this->sigma));

@@ -8,17 +8,19 @@ use Rfd\ImageMagick\Options\CommonOptions;
 
 class Convert extends \Rfd\ImageMagick\Operation\Convert {
 
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         if (!$this->format) {
             throw new ImageMagickException('Can\'t change format to nothing!!');
         }
 
-        // Sneaky!  Eat my own dog food to get in the image information.
-        $processor = clone $this->processor;
-        $processor->addOperation(new Info());
-        $info = $processor->processOperations($image)->getExtra();
-
         $from = 'unknown';
+        
+        if($image) {
+            // Sneaky!  Eat my own dog food to get in the image information.
+            $processor = clone $this->processor;
+            $processor->addOperation(new Info());
+            $info = $processor->processOperations($image)->getExtra();
+        }
 
         switch ($info['type']) {
             case 'JPEG':

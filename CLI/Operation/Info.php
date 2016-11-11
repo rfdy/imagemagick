@@ -9,7 +9,7 @@ use Rfd\ImageMagick\Image\Image;
  */
 class Info extends \Rfd\ImageMagick\Operation\Info {
 
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         $status = 0;
         $output = array();
 

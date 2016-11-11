@@ -10,7 +10,7 @@ use Rfd\ImageMagick\Image\Image;
  * @property Processor $processor
  */
 class Compare extends \Rfd\ImageMagick\Operation\Compare {
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         if (!$this->compare_to) {
             throw new ImageMagickException('No image to compare to!');
         }

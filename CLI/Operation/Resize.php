@@ -9,7 +9,7 @@ use Rfd\ImageMagick\Options\CommonOptions;
  * @property Processor $processor
  */
 class Resize extends \Rfd\ImageMagick\Operation\Resize {
-    public function process(Image $image, $command_line = '') {
+    public function process(Image $image = null, $command_line = '') {
         if ($this->mode & CommonOptions::MODE_FILL_AREA_OR_FIT) {
             // Both...so if it's larger, shrink it to fill the area.
             // Otherwise, fit it.
@@ -49,6 +49,8 @@ class Resize extends \Rfd\ImageMagick\Operation\Resize {
         } elseif ($this->mode & CommonOptions::MODE_RESIZE_ABSOLUTE) {
             $command_line .= ' -gravity ' . escapeshellarg($this->gravity);
             $command_line .= ' -thumbnail ' . escapeshellarg($this->width . 'x' . $this->height . '!');
+        } elseif ($this->mode & CommonOptions::MODE_USE_FILTER) {
+            $command_line .= ' -resize ' . escapeshellarg($this->width . 'x' . $this->height);
         } else {
             $command_line .= ' -gravity ' . escapeshellarg($this->gravity);
             $command_line .= ' -thumbnail ' . escapeshellarg($this->width . 'x' . $this->height);
