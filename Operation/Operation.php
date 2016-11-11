@@ -30,7 +30,6 @@ abstract class Operation {
     const GAMMA = 'gamma';
     const COALESCE = 'coalesce';
     const UNSHARP = 'unsharp';
-    const EXTENT = 'extent';
     const FILTER = 'filter';
     const BORDER = 'border';
     const DEFINE = 'define';

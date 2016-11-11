@@ -12,7 +12,7 @@ class Slice extends \Rfd\ImageMagick\Operation\Slice {
             throw new ImageMagickException('Need both width and height to slice an image');
         }
 
-        $command_line .= ' -background white -gravity ' . escapeshellarg($this->gravity) . ' -extent ' . escapeshellarg($this->width . 'x' . $this->height . '+' . $this->offset_x . '+' . $this->offset_y);
+        $command_line .= ' -background ' . escapeshellarg($this->background) . ' -gravity ' . escapeshellarg($this->gravity) . ' -extent ' . escapeshellarg($this->width . 'x' . $this->height . '+' . $this->offset_x . '+' . $this->offset_y);
 
         $result = new Result();
         $result->setCommandLine($command_line);

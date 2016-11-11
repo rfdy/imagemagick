@@ -45,8 +45,6 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new Coalesce();
             case Operation::UNSHARP:
                 return new Unsharp();
-            case Operation::EXTENT:
-                return new Extent();
             case Operation::FILTER:
                 return new Filter();
             case Operation::BORDER:

@@ -11,11 +11,25 @@ abstract class Slice extends Operation {
     /** @var string */
     protected $gravity;
 
+    /** @var string */
+    protected $background = 'white';
+
     /** @var int */
     protected $offset_x = 0;
 
     /** @var int */
     protected $offset_y = 0;
+
+    /**
+     * @param string $background
+     *
+     * @return $this
+     */
+    public function setBackground($background) {
+        $this->background = $background;
+
+        return $this;
+    }
 
     /**
      * @param string $gravity
