@@ -44,8 +44,8 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
         // Check for a SequenceNumber or Density operation.  They're a little special.
         foreach ($this->operations as $index => $operation) {
             if ($operation instanceof SequenceNumber) {
-                $frame = (int)$operation->getValue();
-                if (!$frame) {
+                $frame = $operation->getValue();
+                if (!is_int($frame)) {
                     throw new ImageMagickException('Frame was not an integer');
                 }
 

@@ -4,7 +4,7 @@ namespace Rfd\ImageMagick\Operation;
 
 abstract class SequenceNumber extends OneShotOperation implements OneShotHasArgument {
 
-    protected $sequence_number = 1;
+    protected $sequence_number = 0;
 
     public function setSequenceNumber($sequence_number) {
         $this->sequence_number = $sequence_number;
