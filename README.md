@@ -65,6 +65,9 @@ Resizes the image based on the width, height, gravity and resize mode
 #### Convert
 Some defaults are set at `CommonOptions::FORMAT_*` it will force the output mode to a specific image type.  Any string that ImageMagick recognizes as an image format will be accepted.
 
+#### SequenceNumber
+This lets you choose a specific page or frame from a PDF or gif, respectively. NB: index starts at 0.
+
 #### Watermark
 Could also be called "Composite."  This takes one image, resizes it to 98% the size of another image, and slaps it on top.  If you use an image with transparency (like we do) you get a nice watermark.
 
