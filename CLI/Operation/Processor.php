@@ -45,11 +45,11 @@ class Processor implements \Rfd\ImageMagick\Operation\Processor {
         foreach ($this->operations as $index => $operation) {
             if ($operation instanceof SequenceNumber) {
                 $frame = $operation->getValue();
-                if (!is_int($frame)) {
+                if (!is_numeric($frame)) {
                     throw new ImageMagickException('Frame was not an integer');
                 }
 
-                $this->temp_input_filename .= '[' . $frame . ']';
+                $this->temp_input_filename .= '[' . (int)$frame . ']';
                 unset($this->operations[$index]);
             }
 
