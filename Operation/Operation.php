@@ -15,6 +15,7 @@ use Rfd\ImageMagick\Image\Image;
 abstract class Operation {
     const ADD_PROFILE = 'addProfile';
     const BLUR = 'blur';
+    const COLOR_SPACE = 'setColorSpace';
     const COMPARE = 'compare';
     const CONVERT = 'convert';
     const DENSITY = 'density';
@@ -33,7 +34,7 @@ abstract class Operation {
     const FILTER = 'filter';
     const BORDER = 'border';
     const DEFINE = 'define';
-    
+
     protected $processor;
     protected $options;
 
