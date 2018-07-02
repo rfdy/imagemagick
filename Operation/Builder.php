@@ -10,6 +10,7 @@ use Rfd\ImageMagick\Image\Image;
  *
  * @method AddProfile|Builder addProfile(string $profile_filename = null)
  * @method Blur blur()
+ * @method ColorSpace|Builder setColorSpace(string $color_space)
  * @method Compare compare()
  * @method Convert|Builder convert(string $format = null)
  * @method Density|Builder density(int $density)
