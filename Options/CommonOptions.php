@@ -41,4 +41,14 @@ abstract class CommonOptions {
     const FORMAT_PNG            = 'png';
     const FORMAT_GIF            = 'gif';
 
+    // A subset of the available color spaces
+    const COLOR_SPACE_CMYK = 'CMYK';
+    const COLOR_SPACE_GRAY = 'Gray';
+    const COLOR_SPACE_HSB = 'HSB';
+    const COLOR_SPACE_HSL = 'HSL';
+    const COLOR_SPACE_LAB = 'Lab';
+    const COLOR_SPACE_RGB = 'RGB';
+    const COLOR_SPACE_SRGB = 'sRGB';
+    const COLOR_SPACE_TRANSPARENT = 'Transparent';
+    const COLOR_SPACE_UNDEFINED = 'Undefined';
 } 
