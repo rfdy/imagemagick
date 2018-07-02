@@ -94,6 +94,12 @@ $operation_builder->addProfile('RGB.icc')
 ```
 Be careful, though.  Each usage of these methods causes the image to be converted in memory from one profile to another.  Read the doc carefully! 
 
+#### Color Space 
+Define the color space to use with the image. A subset of the most common color spaces are included in `CommonOptions::COLOUR_SPACE_*` See: https://www.imagemagick.org/script/command-line-options.php#colorspace
+```
+$operation_builder->setColorSpace(CommonOptions::COLOUR_SPACE_RGB)
+``` 
+
 ## Processing Images
 All processing is done after the command has been built by calling `Builder->finish()`.  If a subclass of Image is provided, it will call `Image->setImageData()` on it.
 ## Instant Operations
