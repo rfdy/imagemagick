@@ -17,6 +17,8 @@ class Factory implements \Rfd\ImageMagick\Operation\Factory {
                 return new Blur();
             case Operation::COMPARE:
                 return new Compare();
+            case Operation::COLOR_SPACE:
+                return new ColorSpace();
             case Operation::CONVERT:
                 return new Convert();
             case Operation::DENSITY:
